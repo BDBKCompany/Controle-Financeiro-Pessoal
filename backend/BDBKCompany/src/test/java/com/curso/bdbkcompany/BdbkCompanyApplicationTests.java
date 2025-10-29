@@ -1,0 +1,13 @@
+package com.curso.bdbkcompany;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class BdbkCompanyApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
