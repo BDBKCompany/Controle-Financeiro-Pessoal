@@ -1,0 +1,36 @@
+package com.curso.Enum;
+
+public enum StatusFatura {
+    ABERTA(0,"ABERTA"),
+    FECHADA(1,"FECHADA"),
+    PAGA(2,"PAGA");
+
+    private Integer id;
+    private String descricao;
+
+    private StatusFatura(Integer id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+
+    }
+    public Integer getId() {
+        return id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public static StatusFatura toEnum(Integer id) {
+        if (id == null) {
+            return null;
+        }
+        for (StatusFatura status : StatusFatura.values()) {
+            if (id.equals(status.getId())) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Status de fatura inválido: " + id);
+    }
+}
+
