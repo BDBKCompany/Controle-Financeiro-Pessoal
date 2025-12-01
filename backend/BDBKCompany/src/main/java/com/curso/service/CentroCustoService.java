@@ -13,8 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class CentroCustoService {
@@ -35,11 +34,11 @@ public class CentroCustoService {
     }
 
     @Transactional(readOnly = true)
-    public List<CentroCustoOutputDTO> listarAtivosPorUsuario(Long usuarioId, Pageable pageable) {
+    public Page<CentroCustoOutputDTO> listarAtivosPorUsuario(Long usuarioId, Pageable pageable) {
         Usuario usuario = usuarioRepositorio.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + usuarioId));
-        Page<CentroCusto> centros = centroCustoRepositorio.findByUsuarioAndAtivoTrue(usuario, pageable);
-        return centros.stream().map(mapper::toDTO).collect(Collectors.toList());
+        Page<CentroCusto> page = centroCustoRepositorio.findByUsuarioAndAtivoTrue(usuario, pageable);
+        return page.map(mapper::toDTO);
     }
 
     @Transactional(readOnly = true)
@@ -52,10 +51,16 @@ public class CentroCustoService {
     @Transactional
     public CentroCustoOutputDTO criar(CentroCustoInputDTO dto, Long usuarioId) {
         Usuario usuario = usuarioRepositorio.findById(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + usuarioId));
+        if (dto.getCodigo() != null && !dto.getCodigo().isBlank()) {
+            Optional<CentroCusto> existente = centroCustoRepositorio.findByUsuarioAndCodigo(usuario, dto.getCodigo());
+            if (existente.isPresent()) {
+                throw new RuntimeException("Código já existe para este usuário");
+            }
+        }
         CentroCusto centro = mapper.toEntity(dto);
         centro.setUsuario(usuario);
-        if (!centro.isAtivo()) throw new RuntimeException("Centro deve ser ativo ao criar");
+        centro.setAtivo(true);
         centro = centroCustoRepositorio.save(centro);
         return mapper.toDTO(centro);
     }
@@ -63,10 +68,16 @@ public class CentroCustoService {
     @Transactional
     public CentroCustoOutputDTO atualizar(Long id, CentroCustoInputDTO dto, Long usuarioId) {
         CentroCusto centro = buscarPorIdInterno(id, usuarioId);
-        mapper.copyToEntity(dto, centro);
         if (!centro.getUsuario().getId().equals(usuarioId)) {
             throw new RuntimeException("Centro não pertence ao usuário");
         }
+        if (dto.getCodigo() != null && !dto.getCodigo().isBlank()) {
+            Optional<CentroCusto> existente = centroCustoRepositorio.findByUsuarioAndCodigo(centro.getUsuario(), dto.getCodigo());
+            if (existente.isPresent() && !existente.get().getId().equals(id)) {
+                throw new RuntimeException("Código já existe para este usuário");
+            }
+        }
+        mapper.copyToEntity(dto, centro);
         centro = centroCustoRepositorio.save(centro);
         return mapper.toDTO(centro);
     }
@@ -74,14 +85,15 @@ public class CentroCustoService {
     @Transactional
     public void inativar(Long id, Long usuarioId) {
         CentroCusto centro = buscarPorIdInterno(id, usuarioId);
-        if (!centro.isAtivo()) throw new RuntimeException("Centro já inativo");
-        Long countVinculos = centroCustoRepositorio.countLancamentosByCentroId(id);
-        if (countVinculos > 0) {
-            centro.setAtivo(false);
-            centroCustoRepositorio.save(centro);
-        } else {
-            centroCustoRepositorio.delete(centro);
+        if (!centro.getUsuario().getId().equals(usuarioId)) {
+            throw new RuntimeException("Centro não pertence ao usuário");
         }
+        if (!centro.isAtivo()) {
+            throw new RuntimeException("Centro já inativo");
+        }
+        Long countVinculos = centroCustoRepositorio.countLancamentosByCentroId(id);
+        centro.setAtivo(false);
+        centroCustoRepositorio.save(centro);
     }
 
     private CentroCusto buscarPorIdInterno(Long id, Long usuarioId) {

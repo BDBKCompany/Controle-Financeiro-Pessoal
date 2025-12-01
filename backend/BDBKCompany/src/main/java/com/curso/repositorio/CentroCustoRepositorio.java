@@ -9,19 +9,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface CentroCustoRepositorio extends JpaRepository<CentroCusto, Long> {
 
-    List<CentroCusto> findByUsuario(Usuario usuario);
     Page<CentroCusto> findByUsuarioAndAtivoTrue(Usuario usuario, Pageable pageable);
 
     @Query("SELECT cc FROM CentroCusto cc WHERE cc.usuario.id = :usuarioId AND cc.ativo = true")
-    List<CentroCusto> findAtivosByUsuarioId(@Param("usuarioId") Long usuarioId);
+    Page<CentroCusto> findAtivosByUsuarioId(@Param("usuarioId") Long usuarioId, Pageable pageable);
 
     Optional<CentroCusto> findByIdAndUsuarioId(Long id, Long usuarioId);
+
+    Optional<CentroCusto> findByUsuarioAndCodigo(Usuario usuario, String codigo);
 
     @Query("SELECT COUNT(l) FROM Lancamento l WHERE l.centroCusto.id = :centroId")
     Long countLancamentosByCentroId(@Param("centroId") Long centroId);

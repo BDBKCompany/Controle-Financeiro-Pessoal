@@ -1,7 +1,6 @@
 package com.curso.mapper;
 
 import com.curso.domains.CentroCusto;
-import com.curso.domains.Usuario;
 import com.curso.dto.CentroCustoInputDTO;
 import com.curso.dto.CentroCustoOutputDTO;
 import org.springframework.stereotype.Component;
@@ -30,7 +29,7 @@ public class CentroCustoMapper {
         if (entity == null) return null;
         CentroCustoOutputDTO dto = new CentroCustoOutputDTO();
         dto.setId(entity.getId());
-        dto.setUsuarioId(entity.getUsuario().getId());
+        dto.setUsuarioId(entity.getUsuario() != null ? entity.getUsuario().getId() : null);
         dto.setNome(entity.getNome());
         dto.setCodigo(entity.getCodigo());
         dto.setAtivo(entity.isAtivo());

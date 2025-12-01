@@ -3,7 +3,6 @@ package com.curso.domains;
 import com.curso.domains.audit.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
@@ -11,24 +10,25 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "centro_custo")
+@Table(name = "centro_custo", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"usuario_id", "codigo"})
+})
 public class CentroCusto extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Usuário é obrigatório")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    @NotBlank(message = "Nome é obrigatório")
-    @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres")
-    @Column(name = "nome", nullable = false)
+    @NotBlank
+    @Size(max = 100)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Size(max = 20, message = "Código deve ter no máximo 20 caracteres")
+    @Size(max = 20)
     @Column(name = "codigo", length = 20)
     private String codigo;
 
