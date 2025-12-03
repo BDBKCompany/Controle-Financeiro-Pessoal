@@ -1,15 +1,30 @@
 package com.curso.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.math.BigDecimal;
 
 public class MovimentoContaInputDTO {
 
+    @NotNull(message = "Id da conta é obrigatório")
     private Long contaId;
-    private String tipo;
-    private BigDecimal valor;
-    private String historico;
+
+    @NotNull(message = "Id de referência é obrigatório")
     private Long referenciaId;
-    private String referenciaTipo;
+
+    @NotNull(message = "O valor não pode ser nulo")
+    @Positive(message = "O valor deve ser maior que zero")
+    private BigDecimal valor;
+
+    @NotNull(message = "O tipo de referência é obrigatório")
+    private ReferenciaTipo referenciaTipo;
+
+    @NotNull(message = "O tipo de movimentação é obrigatório")
+    private TipoTransacao tipo;
+
+    @NotNull(message = "O histórico da movimentação é obrigatório")
+    private String historico;
 
     public Long getContaId() { return contaId; }
     public void setContaId(Long contaId) { this.contaId = contaId; }
