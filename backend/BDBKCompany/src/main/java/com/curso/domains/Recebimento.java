@@ -1,6 +1,7 @@
 package com.curso.domains;
 
 
+import com.curso.domains.audit.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name="recebimento")
-public class Recebimento {
+public class Recebimento extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
