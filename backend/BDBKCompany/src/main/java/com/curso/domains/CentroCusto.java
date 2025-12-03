@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -35,9 +33,6 @@ public class CentroCusto extends Auditable {
     @Column(name = "ativo", nullable = false)
     private boolean ativo = true;
 
-    @OneToMany(mappedBy = "centroCusto", fetch = FetchType.LAZY)
-    private List<Lancamento> lancamentos = new ArrayList<>();
-
     public CentroCusto() {}
 
     public CentroCusto(Usuario usuario, String nome, String codigo) {
@@ -61,9 +56,6 @@ public class CentroCusto extends Auditable {
 
     public boolean isAtivo() { return ativo; }
     public void setAtivo(boolean ativo) { this.ativo = ativo; }
-
-    public List<Lancamento> getLancamentos() { return lancamentos; }
-    public void setLancamentos(List<Lancamento> lancamentos) { this.lancamentos = lancamentos; }
 
     @Override
     public boolean equals(Object o) {

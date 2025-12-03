@@ -6,7 +6,6 @@ import com.curso.dto.CentroCustoInputDTO;
 import com.curso.dto.CentroCustoOutputDTO;
 import com.curso.mapper.CentroCustoMapper;
 import com.curso.repositorio.CentroCustoRepositorio;
-import com.curso.repositorio.LancamentoRepositorio;
 import com.curso.repositorio.UsuarioRepositorio;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,16 +19,13 @@ public class CentroCustoService {
 
     private final CentroCustoRepositorio centroCustoRepositorio;
     private final UsuarioRepositorio usuarioRepositorio;
-    private final LancamentoRepositorio lancamentoRepositorio;
     private final CentroCustoMapper mapper;
 
     public CentroCustoService(CentroCustoRepositorio centroCustoRepositorio,
                               UsuarioRepositorio usuarioRepositorio,
-                              LancamentoRepositorio lancamentoRepositorio,
                               CentroCustoMapper mapper) {
         this.centroCustoRepositorio = centroCustoRepositorio;
         this.usuarioRepositorio = usuarioRepositorio;
-        this.lancamentoRepositorio = lancamentoRepositorio;
         this.mapper = mapper;
     }
 
@@ -91,7 +87,6 @@ public class CentroCustoService {
         if (!centro.isAtivo()) {
             throw new RuntimeException("Centro já inativo");
         }
-        Long countVinculos = centroCustoRepositorio.countLancamentosByCentroId(id);
         centro.setAtivo(false);
         centroCustoRepositorio.save(centro);
     }
