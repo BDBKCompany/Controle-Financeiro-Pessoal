@@ -2,7 +2,7 @@ package com.curso.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 public class ContaBancariaOutputDTO {
 
@@ -20,8 +20,8 @@ public class ContaBancariaOutputDTO {
 
     private Boolean ativa;
 
-    private OffsetDateTime criadoEm;
-    private OffsetDateTime atualizadoEm;
+    private LocalDateTime criadoEm;
+    private LocalDateTime atualizadoEm;
 
     public Long getId() {
         return id;
@@ -103,19 +103,19 @@ public class ContaBancariaOutputDTO {
         this.ativa = ativa;
     }
 
-    public OffsetDateTime getCriadoEm() {
+    public LocalDateTime getCriadoEm() {
         return criadoEm;
     }
 
-    public void setCriadoEm(OffsetDateTime criadoEm) {
+    public void setCriadoEm(LocalDateTime criadoEm) {
         this.criadoEm = criadoEm;
     }
 
-    public OffsetDateTime getAtualizadoEm() {
+    public LocalDateTime getAtualizadoEm() {
         return atualizadoEm;
     }
 
-    public void setAtualizadoEm(OffsetDateTime atualizadoEm) {
+    public void setAtualizadoEm(LocalDateTime atualizadoEm) {
         this.atualizadoEm = atualizadoEm;
     }
 }

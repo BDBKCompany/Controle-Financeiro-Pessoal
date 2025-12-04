@@ -5,7 +5,7 @@ import com.curso.Enum.TipoLancamento;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 public class LancamentoOutputDTO {
 
@@ -41,9 +41,9 @@ public class LancamentoOutputDTO {
 
     private String observacao;
 
-    private OffsetDateTime criadoEm;
+    private LocalDateTime criadoEm;
 
-    private OffsetDateTime atualizadoEm;
+    private LocalDateTime atualizadoEm;
 
     public Long getId() {
         return id;
@@ -189,19 +189,19 @@ public class LancamentoOutputDTO {
         this.observacao = observacao;
     }
 
-    public OffsetDateTime getCriadoEm() {
+    public LocalDateTime getCriadoEm() {
         return criadoEm;
     }
 
-    public void setCriadoEm(OffsetDateTime criadoEm) {
+    public void setCriadoEm(LocalDateTime criadoEm) {
         this.criadoEm = criadoEm;
     }
 
-    public OffsetDateTime getAtualizadoEm() {
+    public LocalDateTime getAtualizadoEm() {
         return atualizadoEm;
     }
 
-    public void setAtualizadoEm(OffsetDateTime atualizadoEm) {
+    public void setAtualizadoEm(LocalDateTime atualizadoEm) {
         this.atualizadoEm = atualizadoEm;
     }
 }

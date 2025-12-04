@@ -2,7 +2,7 @@ package com.curso.service;
 
 import com.curso.domains.CartaoCredito;
 import com.curso.domains.FaturaCartao;
-import com.curso.exception.ResourceNotFoundException;
+import com.curso.repositorio.ResourceNotFoundException;
 import com.curso.repositorio.FaturaCartaoRepositorio;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
