@@ -1,6 +1,6 @@
 package com.curso.dto;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 public class CartaoCreditoOutputDTO {
 
@@ -17,8 +17,8 @@ public class CartaoCreditoOutputDTO {
 
     private Boolean ativo;
 
-    private OffsetDateTime criadoEm;
-    private OffsetDateTime atualizadoEm;
+    private LocalDateTime criadoEm;
+    private LocalDateTime atualizadoEm;
 
     public Long getId() {
         return id;
@@ -92,19 +92,19 @@ public class CartaoCreditoOutputDTO {
         this.ativo = ativo;
     }
 
-    public OffsetDateTime getCriadoEm() {
+    public LocalDateTime getCriadoEm() {
         return criadoEm;
     }
 
-    public void setCriadoEm(OffsetDateTime criadoEm) {
+    public void setCriadoEm(LocalDateTime criadoEm) {
         this.criadoEm = criadoEm;
     }
 
-    public OffsetDateTime getAtualizadoEm() {
+    public LocalDateTime getAtualizadoEm() {
         return atualizadoEm;
     }
 
-    public void setAtualizadoEm(OffsetDateTime atualizadoEm) {
+    public void setAtualizadoEm(LocalDateTime atualizadoEm) {
         this.atualizadoEm = atualizadoEm;
     }
 }

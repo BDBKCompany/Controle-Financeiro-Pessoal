@@ -1,14 +1,14 @@
 package com.curso.dto;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 public class UsuarioOutputDTO {
 
     private Long id;
     private String nome;
     private String email;
-    private OffsetDateTime criadoEm;
-    private OffsetDateTime atualizadoEm;
+    private LocalDateTime criadoEm;
+    private LocalDateTime atualizadoEm;
 
     public Long getId() {
         return id;
@@ -34,19 +34,19 @@ public class UsuarioOutputDTO {
         this.email = email;
     }
 
-    public OffsetDateTime getCriadoEm() {
+    public LocalDateTime getCriadoEm() {
         return criadoEm;
     }
 
-    public void setCriadoEm(OffsetDateTime criadoEm) {
+    public void setCriadoEm(LocalDateTime criadoEm) {
         this.criadoEm = criadoEm;
     }
 
-    public OffsetDateTime getAtualizadoEm() {
+    public LocalDateTime getAtualizadoEm() {
         return atualizadoEm;
     }
 
-    public void setAtualizadoEm(OffsetDateTime atualizadoEm) {
+    public void setAtualizadoEm(LocalDateTime atualizadoEm) {
         this.atualizadoEm = atualizadoEm;
     }
 }

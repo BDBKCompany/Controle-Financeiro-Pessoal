@@ -7,7 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -15,13 +15,17 @@ public abstract class Auditable {
 
     @CreatedDate
     @Column(name = "criado_em", nullable = false, updatable = false)
-    private OffsetDateTime criadoEm;
+    private LocalDateTime criadoEm;
 
     @LastModifiedDate
     @Column(name = "atualizado_em", nullable = false)
-    private OffsetDateTime atualizadoEm;
+    private LocalDateTime atualizadoEm;
 
-    public OffsetDateTime getCriadoEm() { return criadoEm; }
-    public OffsetDateTime getAtualizadoEm() { return atualizadoEm; }
+    public LocalDateTime getCriadoEm() {
+        return criadoEm;
+    }
+
+    public LocalDateTime getAtualizadoEm() {
+        return atualizadoEm;
+    }
 }
-
