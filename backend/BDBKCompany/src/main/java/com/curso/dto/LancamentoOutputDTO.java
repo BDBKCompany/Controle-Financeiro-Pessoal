@@ -1,5 +1,9 @@
 package com.curso.dto;
 
+import com.curso.Enum.StatusLancamento;
+import com.curso.Enum.TipoLancamento;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
@@ -9,15 +13,15 @@ public class LancamentoOutputDTO {
 
     private Long usuarioId;
 
-    private Integer tipo;
+    private TipoLancamento tipo;
 
     private String descricao;
 
-    private Double valor;
+    private BigDecimal valor;
 
-    private Double valorBaixado;
+    private BigDecimal valorBaixado;
 
-    private Integer status;
+    private StatusLancamento status;
 
     private LocalDate dataVencimento;
 
@@ -57,11 +61,11 @@ public class LancamentoOutputDTO {
         this.usuarioId = usuarioId;
     }
 
-    public Integer getTipo() {
+    public TipoLancamento getTipo() {
         return tipo;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(TipoLancamento tipo) {
         this.tipo = tipo;
     }
 
@@ -73,27 +77,27 @@ public class LancamentoOutputDTO {
         this.descricao = descricao;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
-    public Double getValorBaixado() {
+    public BigDecimal getValorBaixado() {
         return valorBaixado;
     }
 
-    public void setValorBaixado(Double valorBaixado) {
+    public void setValorBaixado(BigDecimal valorBaixado) {
         this.valorBaixado = valorBaixado;
     }
 
-    public Integer getStatus() {
+    public StatusLancamento getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(StatusLancamento status) {
         this.status = status;
     }
 

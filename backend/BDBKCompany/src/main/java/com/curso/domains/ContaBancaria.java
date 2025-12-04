@@ -9,7 +9,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name = "conta_bancaria")
 public class ContaBancaria extends Auditable {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,57 +1,45 @@
 package com.curso.domains;
 
-
 import com.curso.domains.audit.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
-@Table(name="recebimento")
+@Table(name = "recebimento")
 public class Recebimento extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "lancamento_id", nullable = false)
     private Lancamento lancamento;
 
     @NotNull
-    @Column(nullable = false)
-    private LocalDate dataRecebimento ;
+    @Column(name = "data_recebimento", nullable = false)
+    private LocalDate dataRecebimento;
 
     @NotNull
-    @Column(nullable = false, precision = 15, scale = 2)
+    @Column(name = "valor_recebido", precision = 15, scale = 2, nullable = false)
     private BigDecimal valorRecebido;
 
-    private Integer contaDestino;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "conta_destino_id")
+    private ContaBancaria contaDestino;
 
+    @Column(name = "observacao", length = 500)
     private String observacao;
 
     public Recebimento() {
     }
 
-    public Recebimento(Long id, Lancamento lancamento,
-                       LocalDate dataRecebimento, BigDecimal valorRecebido,
-                       Integer contaDestino, String observacao) {
-        this.id = id;
-        this.lancamento = lancamento;
-        this.dataRecebimento = dataRecebimento;
-        this.valorRecebido = valorRecebido;
-        this.contaDestino = contaDestino;
-        this.observacao = observacao;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Lancamento getLancamento() {
@@ -78,11 +66,11 @@ public class Recebimento extends Auditable {
         this.valorRecebido = valorRecebido;
     }
 
-    public Integer getContaDestino() {
+    public ContaBancaria getContaDestino() {
         return contaDestino;
     }
 
-    public void setContaDestino(Integer contaDestino) {
+    public void setContaDestino(ContaBancaria contaDestino) {
         this.contaDestino = contaDestino;
     }
 
@@ -95,14 +83,15 @@ public class Recebimento extends Auditable {
     }
 
     @Override
-    public String toString() {
-        return "Recebimento{" +
-                "id=" + id +
-                ", lancamento=" + lancamento +
-                ", dataRecebimento=" + dataRecebimento +
-                ", valorRecebido=" + valorRecebido +
-                ", contaDestino=" + contaDestino +
-                ", observacao='" + observacao + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Recebimento)) return false;
+        Recebimento that = (Recebimento) o;
+        return id != null && id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -2,35 +2,28 @@ package com.curso.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 public class TransferenciaOutputDTO {
 
     private Long id;
-    private Long usuarioId;
-    private Long contaOrigemId;
-    private Long contaDestinoId;
 
-    private String observacao;
-    private String contaOrigemNumero;
-    private String contaDestinoNumero;
+    private Long usuarioId;
+
+    private Long contaOrigemId;
+    private String contaOrigemNome;
+
+    private Long contaDestinoId;
+    private String contaDestinoNome;
 
     private LocalDate data;
+
     private BigDecimal valor;
 
-    public TransferenciaOutputDTO() {
-    }
+    private String observacao;
 
-    public TransferenciaOutputDTO(Long id, Long usuarioId, Long contaOrigemId, Long contaDestinoId, String observacao, String contaOrigemNumero, String contaDestinoNumero, LocalDate data, BigDecimal valor) {
-        this.id = id;
-        this.usuarioId = usuarioId;
-        this.contaOrigemId = contaOrigemId;
-        this.contaDestinoId = contaDestinoId;
-        this.observacao = observacao;
-        this.contaOrigemNumero = contaOrigemNumero;
-        this.contaDestinoNumero = contaDestinoNumero;
-        this.data = data;
-        this.valor = valor;
-    }
+    private OffsetDateTime criadoEm;
+    private OffsetDateTime atualizadoEm;
 
     public Long getId() {
         return id;
@@ -56,6 +49,14 @@ public class TransferenciaOutputDTO {
         this.contaOrigemId = contaOrigemId;
     }
 
+    public String getContaOrigemNome() {
+        return contaOrigemNome;
+    }
+
+    public void setContaOrigemNome(String contaOrigemNome) {
+        this.contaOrigemNome = contaOrigemNome;
+    }
+
     public Long getContaDestinoId() {
         return contaDestinoId;
     }
@@ -64,28 +65,12 @@ public class TransferenciaOutputDTO {
         this.contaDestinoId = contaDestinoId;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public String getContaDestinoNome() {
+        return contaDestinoNome;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public String getContaOrigemNumero() {
-        return contaOrigemNumero;
-    }
-
-    public void setContaOrigemNumero(String contaOrigemNumero) {
-        this.contaOrigemNumero = contaOrigemNumero;
-    }
-
-    public String getContaDestinoNumero() {
-        return contaDestinoNumero;
-    }
-
-    public void setContaDestinoNumero(String contaDestinoNumero) {
-        this.contaDestinoNumero = contaDestinoNumero;
+    public void setContaDestinoNome(String contaDestinoNome) {
+        this.contaDestinoNome = contaDestinoNome;
     }
 
     public LocalDate getData() {
@@ -103,5 +88,28 @@ public class TransferenciaOutputDTO {
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
-}
 
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public OffsetDateTime getCriadoEm() {
+        return criadoEm;
+    }
+
+    public void setCriadoEm(OffsetDateTime criadoEm) {
+        this.criadoEm = criadoEm;
+    }
+
+    public OffsetDateTime getAtualizadoEm() {
+        return atualizadoEm;
+    }
+
+    public void setAtualizadoEm(OffsetDateTime atualizadoEm) {
+        this.atualizadoEm = atualizadoEm;
+    }
+}

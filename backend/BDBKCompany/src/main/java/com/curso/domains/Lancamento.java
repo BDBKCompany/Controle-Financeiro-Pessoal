@@ -1,9 +1,9 @@
 package com.curso.domains;
 
+import com.curso.Enum.MeioPagamento;
+import com.curso.Enum.StatusLancamento;
+import com.curso.Enum.TipoLancamento;
 import com.curso.domains.audit.Auditable;
-import com.curso.enums.MeioPagamento;
-import com.curso.enums.StatusLancamento;
-import com.curso.enums.TipoLancamento;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -80,63 +80,143 @@ public class Lancamento extends Auditable {
     @OneToMany(mappedBy = "lancamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recebimento> recebimentos = new ArrayList<>();
 
-    public Lancamento() {}
+    public Lancamento() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public TipoLancamento getTipo() { return tipo; }
-    public void setTipo(TipoLancamento tipo) { this.tipo = tipo; }
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-    public String getDescricao() { return descricao; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-    public Entidade getEntidade() { return entidade; }
-    public void setEntidade(Entidade entidade) { this.entidade = entidade; }
+    public TipoLancamento getTipo() {
+        return tipo;
+    }
 
-    public CentroCusto getCentroCusto() { return centroCusto; }
-    public void setCentroCusto(CentroCusto centroCusto) { this.centroCusto = centroCusto; }
+    public void setTipo(TipoLancamento tipo) {
+        this.tipo = tipo;
+    }
 
-    public BigDecimal getValor() { return valor; }
-    public void setValor(BigDecimal valor) { this.valor = valor; }
+    public String getDescricao() {
+        return descricao;
+    }
 
-    public LocalDate getDataCompetencia() { return dataCompetencia; }
-    public void setDataCompetencia(LocalDate dataCompetencia) { this.dataCompetencia = dataCompetencia; }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-    public LocalDate getDataVencimento() { return dataVencimento; }
-    public void setDataVencimento(LocalDate dataVencimento) { this.dataVencimento = dataVencimento; }
+    public Entidade getEntidade() {
+        return entidade;
+    }
 
-    public MeioPagamento getMeioPagamento() { return meioPagamento; }
-    public void setMeioPagamento(MeioPagamento meioPagamento) { this.meioPagamento = meioPagamento; }
+    public void setEntidade(Entidade entidade) {
+        this.entidade = entidade;
+    }
 
-    public ContaBancaria getContaBancaria() { return contaBancaria; }
-    public void setContaBancaria(ContaBancaria contaBancaria) { this.contaBancaria = contaBancaria; }
+    public CentroCusto getCentroCusto() {
+        return centroCusto;
+    }
 
-    public CartaoCredito getCartaoCredito() { return cartaoCredito; }
-    public void setCartaoCredito(CartaoCredito cartaoCredito) { this.cartaoCredito = cartaoCredito; }
+    public void setCentroCusto(CentroCusto centroCusto) {
+        this.centroCusto = centroCusto;
+    }
 
-    public StatusLancamento getStatus() { return status; }
-    public void setStatus(StatusLancamento status) { this.status = status; }
+    public BigDecimal getValor() {
+        return valor;
+    }
 
-    public BigDecimal getValorBaixado() { return valorBaixado; }
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public LocalDate getDataCompetencia() {
+        return dataCompetencia;
+    }
+
+    public void setDataCompetencia(LocalDate dataCompetencia) {
+        this.dataCompetencia = dataCompetencia;
+    }
+
+    public LocalDate getDataVencimento() {
+        return dataVencimento;
+    }
+
+    public void setDataVencimento(LocalDate dataVencimento) {
+        this.dataVencimento = dataVencimento;
+    }
+
+    public MeioPagamento getMeioPagamento() {
+        return meioPagamento;
+    }
+
+    public void setMeioPagamento(MeioPagamento meioPagamento) {
+        this.meioPagamento = meioPagamento;
+    }
+
+    public ContaBancaria getContaBancaria() {
+        return contaBancaria;
+    }
+
+    public void setContaBancaria(ContaBancaria contaBancaria) {
+        this.contaBancaria = contaBancaria;
+    }
+
+    public CartaoCredito getCartaoCredito() {
+        return cartaoCredito;
+    }
+
+    public void setCartaoCredito(CartaoCredito cartaoCredito) {
+        this.cartaoCredito = cartaoCredito;
+    }
+
+    public StatusLancamento getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusLancamento status) {
+        this.status = status;
+    }
+
+    public BigDecimal getValorBaixado() {
+        return valorBaixado;
+    }
+
     public void setValorBaixado(BigDecimal valorBaixado) {
-        this.valorBaixado = valorBaixado == null ? BigDecimal.ZERO : valorBaixado;
+        this.valorBaixado = (valorBaixado == null ? BigDecimal.ZERO : valorBaixado);
         atualizarStatusAutomatico();
     }
 
-    public List<Pagamento> getPagamentos() { return pagamentos; }
-    public void setPagamentos(List<Pagamento> pagamentos) { this.pagamentos = pagamentos; }
+    public List<Pagamento> getPagamentos() {
+        return pagamentos;
+    }
 
-    public List<Recebimento> getRecebimentos() { return recebimentos; }
-    public void setRecebimentos(List<Recebimento> recebimentos) { this.recebimentos = recebimentos; }
+    public void setPagamentos(List<Pagamento> pagamentos) {
+        this.pagamentos = pagamentos;
+    }
+
+    public List<Recebimento> getRecebimentos() {
+        return recebimentos;
+    }
+
+    public void setRecebimentos(List<Recebimento> recebimentos) {
+        this.recebimentos = recebimentos;
+    }
 
     public void adicionarPagamento(Pagamento pagamento) {
         if (pagamento == null) return;
         pagamento.setLancamento(this);
         pagamentos.add(pagamento);
+
         if (pagamento.getValorPago() != null) {
             this.valorBaixado = this.valorBaixado.add(pagamento.getValorPago());
             atualizarStatusAutomatico();
@@ -145,10 +225,13 @@ public class Lancamento extends Auditable {
 
     public void removerPagamento(Pagamento pagamento) {
         if (pagamento == null) return;
+
         if (pagamentos.remove(pagamento)) {
             if (pagamento.getValorPago() != null) {
                 this.valorBaixado = this.valorBaixado.subtract(pagamento.getValorPago());
-                if (this.valorBaixado.compareTo(BigDecimal.ZERO) < 0) this.valorBaixado = BigDecimal.ZERO;
+                if (this.valorBaixado.compareTo(BigDecimal.ZERO) < 0) {
+                    this.valorBaixado = BigDecimal.ZERO;
+                }
                 atualizarStatusAutomatico();
             }
             pagamento.setLancamento(null);
@@ -159,6 +242,7 @@ public class Lancamento extends Auditable {
         if (recebimento == null) return;
         recebimento.setLancamento(this);
         recebimentos.add(recebimento);
+
         if (recebimento.getValorRecebido() != null) {
             this.valorBaixado = this.valorBaixado.add(recebimento.getValorRecebido());
             atualizarStatusAutomatico();
@@ -167,10 +251,13 @@ public class Lancamento extends Auditable {
 
     public void removerRecebimento(Recebimento recebimento) {
         if (recebimento == null) return;
+
         if (recebimentos.remove(recebimento)) {
             if (recebimento.getValorRecebido() != null) {
                 this.valorBaixado = this.valorBaixado.subtract(recebimento.getValorRecebido());
-                if (this.valorBaixado.compareTo(BigDecimal.ZERO) < 0) this.valorBaixado = BigDecimal.ZERO;
+                if (this.valorBaixado.compareTo(BigDecimal.ZERO) < 0) {
+                    this.valorBaixado = BigDecimal.ZERO;
+                }
                 atualizarStatusAutomatico();
             }
             recebimento.setLancamento(null);
@@ -183,19 +270,34 @@ public class Lancamento extends Auditable {
         atualizarStatusAutomatico();
     }
 
+    /**
+     * Método público para ser chamado pelo service (como em LancamentoService).
+     */
+    public void validarStatusAutomatico() {
+        atualizarStatusAutomatico();
+    }
+
+    /**
+     * Lógica interna para atualizar o status com base no valor baixado.
+     */
     private void atualizarStatusAutomatico() {
-        if (this.valor == null) return;
-        if (this.valorBaixado.compareTo(BigDecimal.ZERO) <= 0) {
-            this.status = StatusLancamento.PENDENTE;
+        if (this.valor == null) {
             return;
         }
-        int cmp = this.valorBaixado.compareTo(this.valor);
-        if (cmp <= 0 && cmp < 0) {
-            this.status = StatusLancamento.PARCIAL;
+
+        if (this.valorBaixado == null || this.valorBaixado.compareTo(BigDecimal.ZERO) <= 0) {
+            this.status = StatusLancamento.PENDENTE;
+            this.valorBaixado = (this.valorBaixado == null ? BigDecimal.ZERO : this.valorBaixado);
+            return;
         }
-        if (cmp >= 0) {
+
+        int cmp = this.valorBaixado.compareTo(this.valor);
+
+        if (cmp < 0) {
+            this.status = StatusLancamento.PARCIAL;
+        } else { // cmp >= 0
             this.status = StatusLancamento.BAIXADO;
-            this.valorBaixado = this.valor;
+            this.valorBaixado = this.valor; // garante que não passa do valor original
         }
     }
 

@@ -1,8 +1,7 @@
 package com.curso.dto;
 
-
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -15,15 +14,11 @@ public class RecebimentoInputDTO {
     private LocalDate dataRecebimento;
 
     @NotNull(message = "Valor recebido é obrigatório")
-    @DecimalMin(value = "0.01", message = "Valor deve ser maior que zero")
     private BigDecimal valorRecebido;
 
-    @NotNull(message = "Conta de destino é obrigatória")
-    private Integer contaDestino;
-
+    private Long contaDestinoId;
 
     private String observacao;
-
 
     public Long getLancamentoId() {
         return lancamentoId;
@@ -49,12 +44,12 @@ public class RecebimentoInputDTO {
         this.valorRecebido = valorRecebido;
     }
 
-    public Integer getContaDestino() {
-        return contaDestino;
+    public Long getContaDestinoId() {
+        return contaDestinoId;
     }
 
-    public void setContaDestino(Integer contaDestino) {
-        this.contaDestino = contaDestino;
+    public void setContaDestinoId(Long contaDestinoId) {
+        this.contaDestinoId = contaDestinoId;
     }
 
     public String getObservacao() {
@@ -64,6 +59,4 @@ public class RecebimentoInputDTO {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
-
-
 }
