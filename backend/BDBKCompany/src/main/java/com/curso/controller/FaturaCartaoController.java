@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/faturas-cartao")
+@RequestMapping("/api/v1/faturas-cartao")
 public class FaturaCartaoController {
 
     private final FaturaCartaoService faturaCartaoService;
