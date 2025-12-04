@@ -1,42 +1,51 @@
 package com.curso.domains;
 
-import com.curso.Enum.TipoTransacao;
 import com.curso.domains.audit.Auditable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "movimento_conta")
-public class MovimentoConta  extends Auditable{
+public class MovimentoConta extends Auditable {
+
+    public enum TipoTransacao {
+        DEBITO,
+        CREDITO
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "conta_id", nullable = false)
+    private ContaBancaria conta;
+
     @NotNull
-    @Column(name = "conta_id")
-    private Long contaId;
+    @Column(name = "data_movimento", nullable = false)
+    private LocalDate dataMovimento;
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo", length = 20, nullable = false)
     private TipoTransacao tipo;
 
     @NotNull
-    @Positive
+    @Column(name = "valor", precision = 15, scale = 2, nullable = false)
     private BigDecimal valor;
 
+    @Column(name = "historico", length = 500)
     private String historico;
 
-    private Long referenciaId;      // Pode referenciar Transferencia ou Lancamento
-    private String referenciaTipo;  // "TRANSFERENCIA", "PAGAMENTO", "RECEBIMENTO"
+    @Column(name = "referencia_id")
+    private Long referenciaId;
 
-    private LocalDateTime dataMovimento = LocalDateTime.now();
-    private LocalDateTime criadoEm = LocalDateTime.now();
-    private LocalDateTime atualizadoEm = LocalDateTime.now();
+    @Column(name = "referencia_tipo", length = 50)
+    private String referenciaTipo;
 
     public MovimentoConta() {
     }
@@ -45,16 +54,20 @@ public class MovimentoConta  extends Auditable{
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public ContaBancaria getConta() {
+        return conta;
     }
 
-    public Long getContaId() {
-        return contaId;
+    public void setConta(ContaBancaria conta) {
+        this.conta = conta;
     }
 
-    public void setContaId(Long contaId) {
-        this.contaId = contaId;
+    public LocalDate getDataMovimento() {
+        return dataMovimento;
+    }
+
+    public void setDataMovimento(LocalDate dataMovimento) {
+        this.dataMovimento = dataMovimento;
     }
 
     public TipoTransacao getTipo() {
@@ -97,27 +110,16 @@ public class MovimentoConta  extends Auditable{
         this.referenciaTipo = referenciaTipo;
     }
 
-    public LocalDateTime getDataMovimento() {
-        return dataMovimento;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MovimentoConta)) return false;
+        MovimentoConta that = (MovimentoConta) o;
+        return id != null && id.equals(that.id);
     }
 
-    public void setDataMovimento(LocalDateTime dataMovimento) {
-        this.dataMovimento = dataMovimento;
-    }
-
-    public LocalDateTime getCriadoEm() {
-        return criadoEm;
-    }
-
-    public void setCriadoEm(LocalDateTime criadoEm) {
-        this.criadoEm = criadoEm;
-    }
-
-    public LocalDateTime getAtualizadoEm() {
-        return atualizadoEm;
-    }
-
-    public void setAtualizadoEm(LocalDateTime atualizadoEm) {
-        this.atualizadoEm = atualizadoEm;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

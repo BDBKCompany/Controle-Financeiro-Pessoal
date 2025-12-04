@@ -1,9 +1,11 @@
 package com.curso.dto;
 
+import com.curso.Enum.TipoLancamento;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class LancamentoInputDTO {
@@ -12,14 +14,14 @@ public class LancamentoInputDTO {
     private Long usuarioId;
 
     @NotNull(message = "Tipo é obrigatório")
-    private Integer tipo;
+    private TipoLancamento tipo;
 
     @NotBlank(message = "Descrição é obrigatória")
     @Size(max = 200, message = "Descrição deve ter no máximo 200 caracteres")
     private String descricao;
 
     @NotNull(message = "Valor é obrigatório")
-    private Double valor;
+    private BigDecimal valor;
 
     @NotNull(message = "Data de vencimento é obrigatória")
     private LocalDate dataVencimento;
@@ -44,11 +46,11 @@ public class LancamentoInputDTO {
         this.usuarioId = usuarioId;
     }
 
-    public Integer getTipo() {
+    public TipoLancamento getTipo() {
         return tipo;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(TipoLancamento tipo) {
         this.tipo = tipo;
     }
 
@@ -60,11 +62,11 @@ public class LancamentoInputDTO {
         this.descricao = descricao;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

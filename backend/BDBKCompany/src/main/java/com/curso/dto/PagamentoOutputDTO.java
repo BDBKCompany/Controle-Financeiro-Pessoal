@@ -7,11 +7,18 @@ import java.time.OffsetDateTime;
 public class PagamentoOutputDTO {
 
     private Long id;
-    private BigDecimal valorPago;
-    private LocalDate dataPagamento;
-    private String observacao;
+
     private Long lancamentoId;
+
+    private LocalDate dataPagamento;
+
+    private BigDecimal valorPago;
+
     private Long contaOrigemId;
+    private String contaOrigemNome;
+
+    private String observacao;
+
     private OffsetDateTime criadoEm;
     private OffsetDateTime atualizadoEm;
 
@@ -23,12 +30,12 @@ public class PagamentoOutputDTO {
         this.id = id;
     }
 
-    public BigDecimal getValorPago() {
-        return valorPago;
+    public Long getLancamentoId() {
+        return lancamentoId;
     }
 
-    public void setValorPago(BigDecimal valorPago) {
-        this.valorPago = valorPago;
+    public void setLancamentoId(Long lancamentoId) {
+        this.lancamentoId = lancamentoId;
     }
 
     public LocalDate getDataPagamento() {
@@ -39,20 +46,12 @@ public class PagamentoOutputDTO {
         this.dataPagamento = dataPagamento;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public BigDecimal getValorPago() {
+        return valorPago;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public Long getLancamentoId() {
-        return lancamentoId;
-    }
-
-    public void setLancamentoId(Long lancamentoId) {
-        this.lancamentoId = lancamentoId;
+    public void setValorPago(BigDecimal valorPago) {
+        this.valorPago = valorPago;
     }
 
     public Long getContaOrigemId() {
@@ -61,6 +60,22 @@ public class PagamentoOutputDTO {
 
     public void setContaOrigemId(Long contaOrigemId) {
         this.contaOrigemId = contaOrigemId;
+    }
+
+    public String getContaOrigemNome() {
+        return contaOrigemNome;
+    }
+
+    public void setContaOrigemNome(String contaOrigemNome) {
+        this.contaOrigemNome = contaOrigemNome;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public OffsetDateTime getCriadoEm() {

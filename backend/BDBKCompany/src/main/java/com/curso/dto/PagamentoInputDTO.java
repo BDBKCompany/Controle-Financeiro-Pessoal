@@ -1,35 +1,22 @@
 package com.curso.dto;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class PagamentoInputDTO {
 
-    @NotNull
-    @Positive
-    private BigDecimal valorPago;
-
-    @NotNull
+    @NotNull(message = "Data de pagamento é obrigatória")
     private LocalDate dataPagamento;
 
-    private String observacao;
+    @NotNull(message = "Valor pago é obrigatório")
+    private BigDecimal valorPago;
 
-    @NotNull
-    private Long lancamentoId;
-
-    @NotNull
+    @NotNull(message = "Conta de origem é obrigatória")
     private Long contaOrigemId;
 
-    public BigDecimal getValorPago() {
-        return valorPago;
-    }
-
-    public void setValorPago(BigDecimal valorPago) {
-        this.valorPago = valorPago;
-    }
+    private String observacao;
 
     public LocalDate getDataPagamento() {
         return dataPagamento;
@@ -39,20 +26,12 @@ public class PagamentoInputDTO {
         this.dataPagamento = dataPagamento;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public BigDecimal getValorPago() {
+        return valorPago;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public Long getLancamentoId() {
-        return lancamentoId;
-    }
-
-    public void setLancamentoId(Long lancamentoId) {
-        this.lancamentoId = lancamentoId;
+    public void setValorPago(BigDecimal valorPago) {
+        this.valorPago = valorPago;
     }
 
     public Long getContaOrigemId() {
@@ -61,5 +40,13 @@ public class PagamentoInputDTO {
 
     public void setContaOrigemId(Long contaOrigemId) {
         this.contaOrigemId = contaOrigemId;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 }

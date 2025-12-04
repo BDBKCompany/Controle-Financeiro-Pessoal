@@ -19,7 +19,6 @@ public class LancamentoMapper {
         entity.setValor(dto.getValor());
         entity.setDataVencimento(dto.getDataVencimento());
         entity.setDataCompetencia(dto.getDataCompetencia());
-        entity.setObservacao(dto.getObservacao());
 
         return entity;
     }
@@ -34,7 +33,6 @@ public class LancamentoMapper {
         entity.setValor(dto.getValor());
         entity.setDataVencimento(dto.getDataVencimento());
         entity.setDataCompetencia(dto.getDataCompetencia());
-        entity.setObservacao(dto.getObservacao());
     }
 
     public LancamentoOutputDTO toDTO(Lancamento entity) {
@@ -45,7 +43,10 @@ public class LancamentoMapper {
         LancamentoOutputDTO dto = new LancamentoOutputDTO();
 
         dto.setId(entity.getId());
-        dto.setUsuarioId(entity.getUsuario().getId());
+
+        if (entity.getUsuario() != null) {
+            dto.setUsuarioId(entity.getUsuario().getId());
+        }
 
         dto.setTipo(entity.getTipo());
         dto.setDescricao(entity.getDescricao());
@@ -68,15 +69,13 @@ public class LancamentoMapper {
 
         if (entity.getContaBancaria() != null) {
             dto.setContaBancariaId(entity.getContaBancaria().getId());
-            dto.setContaBancariaNome(entity.getContaBancaria().getNome());
+            dto.setContaBancariaNome(entity.getContaBancaria().getApelido());
         }
 
         if (entity.getCartaoCredito() != null) {
             dto.setCartaoCreditoId(entity.getCartaoCredito().getId());
-            dto.setCartaoCreditoNome(entity.getCartaoCredito().getNome());
+            dto.setCartaoCreditoNome(entity.getCartaoCredito().getApelido());
         }
-
-        dto.setObservacao(entity.getObservacao());
 
         dto.setCriadoEm(entity.getCriadoEm());
         dto.setAtualizadoEm(entity.getAtualizadoEm());

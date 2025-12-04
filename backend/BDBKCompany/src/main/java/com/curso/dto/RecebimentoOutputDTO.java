@@ -9,7 +9,6 @@ public class RecebimentoOutputDTO {
     private Long id;
 
     private Long lancamentoId;
-    private String lancamentoDescricao;   // opcional, mas útil
 
     private LocalDate dataRecebimento;
 
@@ -37,14 +36,6 @@ public class RecebimentoOutputDTO {
 
     public void setLancamentoId(Long lancamentoId) {
         this.lancamentoId = lancamentoId;
-    }
-
-    public String getLancamentoDescricao() {
-        return lancamentoDescricao;
-    }
-
-    public void setLancamentoDescricao(String lancamentoDescricao) {
-        this.lancamentoDescricao = lancamentoDescricao;
     }
 
     public LocalDate getDataRecebimento() {
